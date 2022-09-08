@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/course-project.iml" filepath="$PROJECT_DIR$/.idea/course-project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../react-git-app/.idea/react-git-app.iml" filepath="$PROJECT_DIR$/../../react-git-app/.idea/react-git-app.iml" />
     </modules>
   </component>
 </project>
