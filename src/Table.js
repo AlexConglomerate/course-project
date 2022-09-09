@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import {fetchAll} from "./API/fake.api/user.api";
 
-
 const Table = () => {
 
     const [users, setUsers] = useState(fetchAll())
