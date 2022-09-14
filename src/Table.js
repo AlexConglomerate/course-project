@@ -71,7 +71,7 @@ const Table = () => {
 
         <>
             {createHeader()}
-            <br/>HiHiHiHiHiHi<br/>
+            <br/><br/>
             {createTable()}
         </>
     )
