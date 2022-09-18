@@ -1,10 +1,14 @@
-import React from "react"
-import reactDom from "react-dom"
-import "bootstrap/dist/css/bootstrap.css"
-import Table from "./Table";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import "bootstrap/dist/css/bootstrap.css";
+import App from "./app/App";
 
-const App = () => {
-    return <Table/>
-}
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+    <>
+        <App/>
+    </>
+);
 
-reactDom.render(<App/>, document.getElementById("root"))
+
