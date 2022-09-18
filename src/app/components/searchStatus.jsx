@@ -16,7 +16,6 @@ const searchStatus = ({length}) => {
     }
 
     const createClass = (length) => {
-        console.log(1,length)
         if (length > 0) return "badge bg-primary"
         return "badge bg-danger"
     }
