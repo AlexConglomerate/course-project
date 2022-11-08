@@ -7,14 +7,14 @@ const User = ({user, ...rest}) => {
         <tr key={user._id}>
             <td>{user.name}</td>
             <td>
-                {user.qualities.map((item) => <Quality {...item}/>)}
+                {user.qualities.map((item) => <Quality {...item} key={item._id}/>)}
             </td>
             <td>{user.profession.name}</td>
             <td>{user.completedMeetings}</td>
             <td>{user.rate} /5</td>
             <td>
                 <BookMark
-                    status ={user.bookmark}
+                    status={user.bookmark}
                     user={user}
                     {...rest}
                 />
