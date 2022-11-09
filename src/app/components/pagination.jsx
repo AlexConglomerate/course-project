@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from "lodash";
-import PropTypes, {number} from 'prop-types'
+import PropTypes from 'prop-types'
 
 function Pagination({itemsCount, pageSize, onPageChange, currentPage}) {
     const pageCount = Math.ceil(itemsCount / pageSize)

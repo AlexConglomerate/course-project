@@ -1,20 +1,60 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import User from "./user"
 import Pagination from "./pagination";
 import {paginate} from "../utils/paginate";
 import PropTypes from "prop-types";
+import api from "../api";
+import GroupList from "./groupList";
 
 const Users = ({users, ...rest}) => {
     const count = users.length
     const pageSize = 4
     const [currentPage, setCurrentPage] = useState(1)
+    const [professions, setProfessions] = useState();
+    const [selectedProf, setSelectedProf] = useState();
     const handlePageChange = (pageIndex) => {
         setCurrentPage(pageIndex)
     }
+
+    useEffect(() => {
+        api.professions.fetchAll().then((data) => setProfessions(data))
+        // api.professions.fetchAll().then((data) => setProfessions(
+        //     Object.assign(
+        //         data,
+        //         {allProfession: {name: "Все профессии"}}
+        //     )))
+    }, [])
+
+    const handleProfessionSelect = (item) => {
+        setSelectedProf(item)
+        console.log(selectedProf)
+    }
+
     if (count === 0) return
-    const userCrop = paginate(users, currentPage, pageSize)
+
+    const filteredUsers = selectedProf // && selectedProf._id
+        ? users.filter(user => user.profession === selectedProf)
+        : users
+    const userCrop = paginate(filteredUsers, currentPage, pageSize)
+    const clearFilter = () => {
+        setSelectedProf()
+    }
     return (
         <>
+            {professions && (
+                <>
+                    <GroupList
+                        items={professions}
+                        selectedItem={selectedProf}
+                        onItemSelect={handleProfessionSelect}
+                    />
+                    <button
+                        className={"btn btn-secondary mt-2"}
+                        onClick={clearFilter}>Очистить
+                    </button>
+                </>
+            )}
+
             <table className="table">
                 <thead>
                 <tr>
