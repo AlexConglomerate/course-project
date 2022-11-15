@@ -27,8 +27,12 @@ const Users = ({users, ...rest}) => {
 
 
     const handleProfessionSelect = (item) => {
-        console.log(item)
+        // console.log(item)
         setSelectedProf(item)
+    }
+
+    const handleSort = (item) => {
+        console.log(item)
     }
 
     // if (count === 0) return
@@ -64,6 +68,7 @@ const Users = ({users, ...rest}) => {
                     <UsersTable
                         users={userCrop}
                         {...rest}
+                        onSort={handleSort}
                     />
 
                     <div className="d-flex justify-content-center">
