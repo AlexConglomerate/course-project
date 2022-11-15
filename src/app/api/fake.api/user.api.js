@@ -147,7 +147,7 @@ const users = [
 const fetchAll = () => new Promise((resolve) => {
     window.setTimeout(function () {
         resolve(users)
-    }, 2000) // делаем искусственную задержку в 2 секунды
+    }, 200) // делаем искусственную задержку в 2 секунды
 })
 
 export default {fetchAll}

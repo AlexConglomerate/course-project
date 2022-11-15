@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from "react";
-import User from "./user"
 import Pagination from "./pagination";
 import {paginate} from "../utils/paginate";
 import PropTypes from "prop-types";
 import api from "../api";
 import GroupList from "./groupList";
 import SearchStatus from "./searchStatus"
+import UsersTable from "./usersTable";
 
 
 const Users = ({users, ...rest}) => {
@@ -61,28 +61,11 @@ const Users = ({users, ...rest}) => {
                 <div className="d-flex flex-column">
                     {<SearchStatus length={count}/>}
 
-                    <table className="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">Имя</th>
-                            <th scope="col">Качества</th>
-                            <th scope="col">Профессия</th>
-                            <th scope="col">Встретился, раз</th>
-                            <th scope="col">Оценка</th>
-                            <th scope="col">Избранное</th>
-                            <th/>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {userCrop.map((user) => (
-                            <User
-                                key={user._id}
-                                user={user}
-                                {...rest}
-                            />
-                        ))}
-                        </tbody>
-                    </table>
+                    <UsersTable
+                        users={userCrop}
+                        {...rest}
+                    />
+
                     <div className="d-flex justify-content-center">
                         <Pagination
                             itemsCount={count}
