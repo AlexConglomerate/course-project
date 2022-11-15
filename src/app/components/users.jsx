@@ -34,7 +34,7 @@ const Users = ({users, ...rest}) => {
     // if (count === 0) return
 
     const filteredUsers = selectedProf // && selectedProf._id
-        ? users.filter(user => user.profession === selectedProf)
+        ? users.filter(user => JSON.stringify(user.profession) === JSON.stringify(selectedProf))
         : users
     const count = filteredUsers.length
     const userCrop = paginate(filteredUsers, currentPage, pageSize)
