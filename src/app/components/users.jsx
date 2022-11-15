@@ -19,12 +19,8 @@ const Users = ({users, ...rest}) => {
 
     useEffect(() => {
         api.professions.fetchAll().then((data) => setProfessions(data))
-        // api.professions.fetchAll().then((data) => setProfessions(
-        //     Object.assign(
-        //         data,
-        //         {allProfession: {name: "Все профессии"}}
-        //     )))
     }, [])
+
     useEffect(() => {
         setCurrentPage(1)
     }, [selectedProf]);
@@ -32,7 +28,7 @@ const Users = ({users, ...rest}) => {
 
     const handleProfessionSelect = (item) => {
         setSelectedProf(item)
-        console.log(selectedProf)
+        console.log(111,selectedProf)
     }
 
     if (count === 0) return
