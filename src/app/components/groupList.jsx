@@ -16,7 +16,7 @@ function GroupList({items, valueProperty, contentProperty, onItemSelect, selecte
                 {toArray(items).map(item => {
                     return (
                         <button className={"list-group-item" +
-                            (item == selectedItem ? " active" : "")}
+                            (item === selectedItem ? " active" : "")}
                                 key={item[valueProperty]}
                                 onClick={() => onItemSelect(item)}
                         >
@@ -24,7 +24,6 @@ function GroupList({items, valueProperty, contentProperty, onItemSelect, selecte
                         </button>
                     )
                 })}
-
 
 
                 {/*{Object.keys(items).map(item => {*/}
@@ -39,7 +38,6 @@ function GroupList({items, valueProperty, contentProperty, onItemSelect, selecte
                 {/*        </button>*/}
                 {/*    )*/}
                 {/*})}*/}
-
 
 
             </ul>

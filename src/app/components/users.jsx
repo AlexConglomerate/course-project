@@ -31,7 +31,7 @@ const Users = ({users, ...rest}) => {
         setSelectedProf(item)
     }
 
-    if (count === 0) return
+    // if (count === 0) return
 
     const filteredUsers = selectedProf // && selectedProf._id
         ? users.filter(user => user.profession === selectedProf)
