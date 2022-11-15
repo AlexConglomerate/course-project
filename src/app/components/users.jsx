@@ -6,13 +6,15 @@ import api from "../api";
 import GroupList from "./groupList";
 import SearchStatus from "./searchStatus"
 import UsersTable from "./usersTable";
+import _ from "lodash"
 
 
 const Users = ({users, ...rest}) => {
-    const pageSize = 4
+    const pageSize = 8
     const [currentPage, setCurrentPage] = useState(1)
     const [professions, setProfessions] = useState();
     const [selectedProf, setSelectedProf] = useState();
+    const [sortBy, setSortBy] = useState({iter: "name", order: "asc"});
     const handlePageChange = (pageIndex) => {
         setCurrentPage(pageIndex)
     }
@@ -27,21 +29,25 @@ const Users = ({users, ...rest}) => {
 
 
     const handleProfessionSelect = (item) => {
-        // console.log(item)
         setSelectedProf(item)
     }
 
     const handleSort = (item) => {
-        console.log(item)
+        if (sortBy.iter === item) {
+            setSortBy((prevState) => ({...prevState, order: prevState.order === 'asc' ? 'desc' : 'asc'}))
+        } else {
+            setSortBy({iter: item, order: 'asc'})
+        }
+        // const order = sortBy.order === 'asc' ? 'desc' : 'asc'
+        // setSortBy({iter: item, order: order})
     }
-
-    // if (count === 0) return
 
     const filteredUsers = selectedProf // && selectedProf._id
         ? users.filter(user => JSON.stringify(user.profession) === JSON.stringify(selectedProf))
         : users
     const count = filteredUsers.length
-    const userCrop = paginate(filteredUsers, currentPage, pageSize)
+    const sortedUsers = _.orderBy(filteredUsers, [sortBy.iter], [sortBy.order])
+    const userCrop = paginate(sortedUsers, currentPage, pageSize)
     const clearFilter = () => {
         setSelectedProf()
     }
