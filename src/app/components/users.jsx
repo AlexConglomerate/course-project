@@ -69,7 +69,7 @@ const Users = ({users, ...rest}) => {
                         users={userCrop}
                         {...rest}
                         onSort={handleSort}
-                        currentSort={sortBy}
+                        selectedSort={sortBy}
                     />
 
                     <div className="d-flex justify-content-center">
