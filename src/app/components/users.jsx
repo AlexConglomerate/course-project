@@ -27,8 +27,8 @@ const Users = ({users, ...rest}) => {
 
 
     const handleProfessionSelect = (item) => {
+        console.log(item)
         setSelectedProf(item)
-        console.log(111,selectedProf)
     }
 
     if (count === 0) return

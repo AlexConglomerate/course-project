@@ -2,22 +2,46 @@ import React from 'react';
 import PropTypes from "prop-types";
 
 function GroupList({items, valueProperty, contentProperty, onItemSelect, selectedItem}) {
+
+    const toArray = (elem) => {
+        return typeof elem === 'object'
+            ? Object.values(elem)
+            : elem
+    }
+
     return (
         <>
             <ul className="list-group">
-                {Object.keys(items).map(item => {
-                    return (
-                        // <li className={"list-group-item"}
-                        <button className={"list-group-item" +
-                            (items[item] == selectedItem ? " active" : "")}
-                                key={items[item][valueProperty]}
-                                onClick={() => onItemSelect(items[item])}
-                        >
-                            {items[item][contentProperty]}
 
+                {toArray(items).map(item => {
+                    return (
+                        <button className={"list-group-item" +
+                            (item == selectedItem ? " active" : "")}
+                                key={item[valueProperty]}
+                                onClick={() => onItemSelect(item)}
+                        >
+                            {item[contentProperty]}
                         </button>
                     )
                 })}
+
+
+
+                {/*{Object.keys(items).map(item => {*/}
+                {/*    return (*/}
+                {/*        <button className={"list-group-item" +*/}
+                {/*            (items[item] == selectedItem ? " active" : "")}*/}
+                {/*                key={items[item][valueProperty]}*/}
+                {/*                onClick={() => onItemSelect(items[item])}*/}
+                {/*        >*/}
+                {/*            {items[item][contentProperty]}*/}
+
+                {/*        </button>*/}
+                {/*    )*/}
+                {/*})}*/}
+
+
+
             </ul>
         </>
     );
@@ -29,7 +53,7 @@ GroupList.defaultProps = {
 }
 
 GroupList.propTypes = {
-    item: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    items: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     valueProperty: PropTypes.string.isRequired,
     contentProperty: PropTypes.string.isRequired,
     onItemSelect: PropTypes.func.isRequired,

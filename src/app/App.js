@@ -8,7 +8,7 @@ const App = () => {
 
     useEffect(() => {
         api.users.fetchAll().then((data) => setStatus(data))
-    },[users])
+    },[])
 
 
     const handleDelete = (userId) => {
