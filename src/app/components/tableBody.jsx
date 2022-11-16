@@ -10,6 +10,7 @@ function TableBody({data, columns}) {
                 {Object.keys(columns).map(column => (
                     <td key={column}>{_.get(item, columns[column].path)}</td>
                 ))}
+
             </tr>
         ))}
         </tbody>
