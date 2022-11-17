@@ -4,15 +4,15 @@ import api from "./api"
 
 const App = () => {
 
-    const [users, setStatus] = useState()
+    const [users, setUsers] = useState()
 
     useEffect(() => {
-        api.users.fetchAll().then((data) => setStatus(data))
+        api.users.fetchAll().then((data) => setUsers(data))
     },[])
 
 
     const handleDelete = (userId) => {
-        setStatus(users.filter(user => user._id !== userId))
+        setUsers(users.filter(user => user._id !== userId))
     }
 
     const handleToggleBookmark = (id) => {
@@ -23,7 +23,7 @@ const App = () => {
                 return i
             }
         )
-        setStatus(newArr)
+        setUsers(newArr)
     }
 
     return (

@@ -3,8 +3,8 @@ import React from 'react';
 import PropTypes from "prop-types";
 import TableHeader from "./tableHeader";
 import TableBody from "./tableBody";
-import Bookmark from "./bookmark";
 import BookMark from "./bookmark";
+import QualitiesList from "./qualitiesList";
 
 
 function UsersTable({
@@ -17,10 +17,11 @@ function UsersTable({
                     }) {
     const columns = {
         name: {path: 'name', name: 'Имя'},
-        qualities: {name: 'Качества'},
+        qualities: {name: 'Качества', component: (user) => (<QualitiesList qualities={user.qualities}/>)},
         professions: {path: 'profession.name', name: 'Профессия'},
         completedMeetings: {path: 'completedMeetings', name: 'Встретился, раз'},
         rate: {path: 'rate', name: 'Оценка'},
+
         bookmark: {
             path: 'bookmark', name: 'Избранное',
             component: (user) => (
@@ -32,6 +33,7 @@ function UsersTable({
                 />
             )
         },
+
         delete: {
             component: (user) => (
                 <button
