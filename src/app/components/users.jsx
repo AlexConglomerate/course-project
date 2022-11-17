@@ -40,7 +40,7 @@ const Users = ({users, ...rest}) => {
         ? users.filter(user => JSON.stringify(user.profession) === JSON.stringify(selectedProf))
         : users
     const count = filteredUsers.length
-    const sortedUsers = _.orderBy(filteredUsers, [sortBy.iter], [sortBy.order])
+    const sortedUsers = _.orderBy(filteredUsers, [sortBy.path], [sortBy.order])
     const userCrop = paginate(sortedUsers, currentPage, pageSize)
     const clearFilter = () => {
         setSelectedProf()
