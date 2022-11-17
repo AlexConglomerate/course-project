@@ -1,6 +1,5 @@
 import React from "react";
 
-
 const BookMark = ({status, ...rest}) => {
     const name = () => {
         return status === true ? "bi bi-bookmark-heart-fill" : "bi bi-bookmark"
