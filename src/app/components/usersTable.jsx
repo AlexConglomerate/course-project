@@ -1,5 +1,4 @@
 import React from 'react';
-// import User from "./user";
 import PropTypes from "prop-types";
 // import TableHeader from "./tableHeader";
 // import TableBody from "./tableBody";
@@ -48,8 +47,12 @@ function UsersTable({
     }
 
     return (
-            <Table onSort={onSort} selectedSort={selectedSort} columns={columns} data={users}/>
-    );
+        // <Table>
+        //     <TableHeader {...{onSort, selectedSort, columns}}/>
+        //     <TableBody {...{columns, data: users}}/>
+        // </Table>
+        <Table onSort={onSort} selectedSort={selectedSort} columns={columns} data={users}/>
+    )
 }
 
 UsersTable.propTypes = {
