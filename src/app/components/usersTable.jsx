@@ -5,14 +5,7 @@ import QualitiesList from "./qualitiesList";
 import Table from "./table";
 
 
-function UsersTable({
-                        users,
-                        onSort,
-                        selectedSort,
-                        onToggleBookmark,
-                        onDelete,
-                        ...rest
-                    }) {
+const UsersTable = ({users, onSort, selectedSort, onToggleBookmark, onDelete, ...rest}) => {
     const columns = {
         name: {path: 'name', name: 'Имя'},
         qualities: {name: 'Качества', component: (user) => (<QualitiesList qualities={user.qualities}/>)},
@@ -21,7 +14,8 @@ function UsersTable({
         rate: {path: 'rate', name: 'Оценка'},
 
         bookmark: {
-            path: 'bookmark', name: 'Избранное',
+            path: 'bookmark',
+            name: 'Избранное',
             component: (user) => (
                 <BookMark
                     status={user.bookmark}

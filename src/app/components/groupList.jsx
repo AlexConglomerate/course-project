@@ -24,22 +24,6 @@ function GroupList({items, valueProperty, contentProperty, onItemSelect, selecte
                         </button>
                     )
                 })}
-
-
-                {/*{Object.keys(items).map(item => {*/}
-                {/*    return (*/}
-                {/*        <button className={"list-group-item" +*/}
-                {/*            (items[item] == selectedItem ? " active" : "")}*/}
-                {/*                key={items[item][valueProperty]}*/}
-                {/*                onClick={() => onItemSelect(items[item])}*/}
-                {/*        >*/}
-                {/*            {items[item][contentProperty]}*/}
-
-                {/*        </button>*/}
-                {/*    )*/}
-                {/*})}*/}
-
-
             </ul>
         </>
     );

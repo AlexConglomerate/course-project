@@ -8,38 +8,17 @@ import SearchStatus from "./searchStatus"
 import UsersTable from "./usersTable";
 import _ from "lodash"
 
-
 const Users = () => {
     const pageSize = 8
-    const [currentPage, setCurrentPage] = useState(1)
+    const [users, setUsers] = useState()
     const [professions, setProfessions] = useState();
     const [selectedProf, setSelectedProf] = useState();
+    const [currentPage, setCurrentPage] = useState(1)
     const [sortBy, setSortBy] = useState({iter: "name", order: "asc"});
-    const [users, setUsers] = useState()
 
     useEffect(() => {
         api.users.fetchAll().then((data) => setUsers(data))
     }, [])
-
-
-    const handleDelete = (userId) => {
-        setUsers(users.filter(user => user._id !== userId))
-    }
-
-    const handleToggleBookmark = (id) => {
-        const newArr = users.map(i => {
-                if (i._id === id) {
-                    i.bookmark = i.bookmark === false ? true : false
-                }
-                return i
-            }
-        )
-        setUsers(newArr)
-    }
-
-    const handlePageChange = (pageIndex) => {
-        setCurrentPage(pageIndex)
-    }
 
     useEffect(() => {
         api.professions.fetchAll().then((data) => setProfessions(data))
@@ -50,24 +29,29 @@ const Users = () => {
     }, [selectedProf]);
 
 
-    const handleProfessionSelect = (item) => {
-        setSelectedProf(item)
+    const handlePageChange = pageIndex => setCurrentPage(pageIndex)
+    const handleProfessionSelect = item => setSelectedProf(item)
+    const handleSort = item => setSortBy(item)
+    const clearFilter = () => setSelectedProf()
+    const handleDelete = userId => setUsers(users.filter(user => user._id !== userId))
+    const handleToggleBookmark = id => {
+        const newArr = users.map(i => {
+                if (i._id === id) i.bookmark = i.bookmark === false ? true : false
+                return i
+            }
+        )
+        setUsers(newArr)
     }
 
-    const handleSort = (item) => {
-        setSortBy(item)
-    }
 
     if (users) {
-        const filteredUsers = selectedProf // && selectedProf._id
+        const filteredUsers = selectedProf
             ? users.filter(user => JSON.stringify(user.profession) === JSON.stringify(selectedProf))
             : users
         const count = filteredUsers.length
         const sortedUsers = _.orderBy(filteredUsers, [sortBy.path], [sortBy.order])
         const userCrop = paginate(sortedUsers, currentPage, pageSize)
-        const clearFilter = () => {
-            setSelectedProf()
-        }
+
         return (
             <>
                 <div className="d-flex">
@@ -86,6 +70,7 @@ const Users = () => {
                     )}
 
                     <div className="d-flex flex-column">
+
                         {<SearchStatus length={count}/>}
 
                         <UsersTable
@@ -104,7 +89,9 @@ const Users = () => {
                                 onPageChange={handlePageChange}
                             />
                         </div>
+
                     </div>
+
                 </div>
             </>
         )
