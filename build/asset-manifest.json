@@ -1,13 +1,13 @@
 {
-  "main.js": "/course-project/static/js/main.44f93c1f.chunk.js",
-  "main.js.map": "/course-project/static/js/main.44f93c1f.chunk.js.map",
-  "static/css/1.2da20fcf.chunk.css": "/course-project/static/css/1.2da20fcf.chunk.css",
-  "static/js/1.9c90ba28.chunk.js": "/course-project/static/js/1.9c90ba28.chunk.js",
-  "static/js/1.9c90ba28.chunk.js.map": "/course-project/static/js/1.9c90ba28.chunk.js.map",
-  "runtime~main.js": "/course-project/static/js/runtime~main.127f4f50.js",
-  "runtime~main.js.map": "/course-project/static/js/runtime~main.127f4f50.js.map",
-  "static/css/1.2da20fcf.chunk.css.map": "/course-project/static/css/1.2da20fcf.chunk.css.map",
-  "index.html": "/course-project/index.html",
-  "precache-manifest.000789b70972d19b34da7f44e45ce224.js": "/course-project/precache-manifest.000789b70972d19b34da7f44e45ce224.js",
-  "service-worker.js": "/course-project/service-worker.js"
+    "main.js": "/course-project/static/js/main.44f93c1f.chunk.js",
+    "main.js.map": "/course-project/static/js/main.44f93c1f.chunk.js.map",
+    "static/css/1.2da20fcf.chunk.css": "/course-project/static/css/1.2da20fcf.chunk.css",
+    "static/js/1.9c90ba28.chunk.js": "/course-project/static/js/1.9c90ba28.chunk.js",
+    "static/js/1.9c90ba28.chunk.js.map": "/course-project/static/js/1.9c90ba28.chunk.js.map",
+    "runtime~main.js": "/course-project/static/js/runtime~main.127f4f50.js",
+    "runtime~main.js.map": "/course-project/static/js/runtime~main.127f4f50.js.map",
+    "static/css/1.2da20fcf.chunk.css.map": "/course-project/static/css/1.2da20fcf.chunk.css.map",
+    "index.html": "/course-project/index.html",
+    "precache-manifest.000789b70972d19b34da7f44e45ce224.js": "/course-project/precache-manifest.000789b70972d19b34da7f44e45ce224.js",
+    "service-worker.js": "/course-project/service-worker.js"
 }
