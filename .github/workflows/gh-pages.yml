@@ -1,14 +1,13 @@
 name: Github Page Deploy Workflow
 
-
 on:
   push:
-    branches: [ master ] # name branch for deploy
+    branches: [ master ]
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
       - name: Create env
         run: |
           touch .env
