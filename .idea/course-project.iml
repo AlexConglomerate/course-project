@@ -9,6 +9,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="react-git-app" />
-    <orderEntry type="module" module-name="app-test" />
+    <orderEntry type="module" module-name="react-router-dom" />
   </component>
 </module>
