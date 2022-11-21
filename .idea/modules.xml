@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/course-project.iml" filepath="$PROJECT_DIR$/.idea/course-project.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../react-git-app/.idea/react-git-app.iml" filepath="$PROJECT_DIR$/../../react-git-app/.idea/react-git-app.iml" />
-      <module fileurl="file://$USER_HOME$/Desktop/йцу/.idea/йцу.iml" filepath="$USER_HOME$/Desktop/йцу/.idea/йцу.iml" />
     </modules>
   </component>
 </project>
