@@ -17,29 +17,7 @@ const UsersList = () => {
     const [sortBy, setSortBy] = useState({path: "name", order: "asc"});
     const [users, setUsers] = useState();
     const [search, setSearch] = useState()
-    // const [usersCrop, setUsersCrop] = useState(users);
-
-    // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-    // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-
-    useEffect(() => {
-        api.users.fetchAll().then((data) => setUsers(data));
-    }, []);
-    useEffect(() => {
-        api.professions.fetchAll().then((data) => setProfession(data));
-    }, []);
-    useEffect(() => {
-        setCurrentPage(1);
-    }, [selectedProf]);
-
-    useEffect(() => {
-        const searchUsers = search
-            ? users.filter(((user) => user.name.includes(search)))
-            : users;
-        // setUsersCrop(searchUsers)
-        console.log(`-----------------------------------`)
-        if (searchUsers) searchUsers.map(i => console.log(i.name))
-    }, [search]);
+    const [usersCrop, setUsersCrop] = useState();
 
     // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
     // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -67,22 +45,43 @@ const UsersList = () => {
         setSortBy(item);
     };
     const clearFilter = () => setSelectedProf()
+    const clearSearch = () => setSearch('')
 
-
-    if (!users) return "loading..."
     // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
     // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-    const filteredUsers = selectedProf
-        ? users.filter((user) => JSON.stringify(user.profession) === JSON.stringify(selectedProf))
-        : users;
 
-    // let filteredUsers = users
-    // if (search) filteredUsers = users.filter(((user) => user.name.includes(search)))
-    // if (selectedProf) filteredUsers = users.filter((user) => JSON.stringify(user.profession) === JSON.stringify(selectedProf))
+    useEffect(() => {
+        api.professions.fetchAll().then((data) => setProfession(data));
+        api.users.fetchAll().then((data) => {
+            setUsers(data)
+            setUsersCrop(data)
+        });
+    }, []);
 
-    const count = filteredUsers.length;
-    const sortedUsers = _.orderBy(filteredUsers, [sortBy.path], [sortBy.order]);
-    const usersCrop = paginate(sortedUsers, currentPage, pageSize)
+    useEffect(() => {
+        setCurrentPage(1);
+        clearSearch()
+        const filteredUsers = selectedProf
+            ? users.filter((user) => JSON.stringify(user.profession) === JSON.stringify(selectedProf))
+            : users;
+        setUsersCrop(filteredUsers)
+    }, [selectedProf])
+
+    useEffect(() => {
+        clearFilter()
+        const filteredUsers = search
+            ? users.filter(((user) => user.name.includes(search)))
+            : users
+        setUsersCrop(filteredUsers)
+    }, [search])
+
+
+    // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+    // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+    if (!usersCrop) return "loading..."
+    const count = usersCrop.length;
+    const sortedUsers = _.orderBy(usersCrop, [sortBy.path], [sortBy.order]);
+    const showUsers = paginate(sortedUsers, currentPage, pageSize)
 
     return (
         <div className="d-flex">
@@ -107,7 +106,7 @@ const UsersList = () => {
                 <Search onChange={handleChange}/>
                 {count > 0 && (
                     <UserTable
-                        users={usersCrop}
+                        users={showUsers}
                         onSort={handleSort}
                         selectedSort={sortBy}
                         onDelete={handleDelete}
