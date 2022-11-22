@@ -1,20 +1,23 @@
 import React from 'react';
 import PropTypes from "prop-types";
 
-function Search({onChange}) {
+function Search({onChange, value}) {
     return (
         <div>
             <input
-                placeholder="Search... "
+                className="form-control"
+                placeholder="Search..."
                 type="text"
                 onChange={onChange}
+                value={value}
             />
         </div>
     );
 }
 
-Search.propTypes = {
-    onChange: PropTypes.func.isRequired,
-}
+Search.propTypes =
+    {
+        onChange: PropTypes.func.isRequired,
+    }
 
 export default Search;

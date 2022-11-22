@@ -45,11 +45,7 @@ const UsersList = () => {
         setSortBy(item);
     };
     const clearFilter = () => setSelectedProf()
-    const clearSearch = () => {
-        console.log("search", search)
-        setSearch('')
-        console.log("search", search)
-    }
+    const clearSearch = () => setSearch('')
 
     // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
     // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -63,6 +59,7 @@ const UsersList = () => {
     }, []);
 
     useEffect(() => {
+        if (!selectedProf && search) return
         clearSearch()
         setCurrentPage(1);
         const filteredUsers = selectedProf
@@ -72,6 +69,7 @@ const UsersList = () => {
     }, [selectedProf])
 
     useEffect(() => {
+        if (selectedProf && !search) return
         clearFilter()
         const filteredUsers = search
             ? users.filter(((user) => user.name.includes(search)))
@@ -107,7 +105,12 @@ const UsersList = () => {
             )}
             <div className="d-flex flex-column">
                 <SearchStatus length={count}/>
-                <Search onChange={handleChange}/>
+
+                <Search
+                    onChange={handleChange}
+                    value={search}
+                />
+
                 {count > 0 && (
                     <UserTable
                         users={showUsers}
