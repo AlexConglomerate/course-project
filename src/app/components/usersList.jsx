@@ -16,8 +16,8 @@ const UsersList = () => {
     const [selectedProf, setSelectedProf] = useState();
     const [sortBy, setSortBy] = useState({path: "name", order: "asc"});
     const [users, setUsers] = useState();
-    const [search, setSearch] = useState()
     const [usersCrop, setUsersCrop] = useState();
+    const [search, setSearch] = useState()
 
     // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
     // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -45,7 +45,11 @@ const UsersList = () => {
         setSortBy(item);
     };
     const clearFilter = () => setSelectedProf()
-    const clearSearch = () => setSearch('')
+    const clearSearch = () => {
+        console.log("search", search)
+        setSearch('')
+        console.log("search", search)
+    }
 
     // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
     // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -59,8 +63,8 @@ const UsersList = () => {
     }, []);
 
     useEffect(() => {
-        setCurrentPage(1);
         clearSearch()
+        setCurrentPage(1);
         const filteredUsers = selectedProf
             ? users.filter((user) => JSON.stringify(user.profession) === JSON.stringify(selectedProf))
             : users;
@@ -75,9 +79,9 @@ const UsersList = () => {
         setUsersCrop(filteredUsers)
     }, [search])
 
+    // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+    // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-    // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-    // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
     if (!usersCrop) return "loading..."
     const count = usersCrop.length;
     const sortedUsers = _.orderBy(usersCrop, [sortBy.path], [sortBy.order]);
