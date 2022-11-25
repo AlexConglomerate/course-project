@@ -9,7 +9,6 @@ const UserPage = ({userId}) => {
     const [user, setUser] = useState();
     useEffect(() => {
         api.users.getById(userId).then((data) => setUser(data));
-        console.log(`11111111`, user)
     }, []);
     const handleClick = () => {
         history.push(`/users/${user._id}/edit`);

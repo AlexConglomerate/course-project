@@ -24,11 +24,10 @@ const EditUser = (props) => {
 
             const profession = {
                 "_id": data.profession,
-                "name": professions.filter(item => item.value === data.profession).label,
+                "name": professions.filter(item => item.value === data.profession)[0].label,
             }
 
-            const newData = {...data, qualities,profession};
-
+            const newData = {...data, qualities, profession};
             api.users.update(userId, newData)
             history.push(`/users/${userId}/`)
         }
@@ -36,6 +35,7 @@ const EditUser = (props) => {
         useEffect(() => {
             api.users.fetchAll().then((data) => {
                 const user = data.filter(item => item._id === userId)[0]
+                console.log(`До обновления`, user)
                 const qualities = user.qualities.reduce((acc, item) => {
                     acc.push({
                         value: item._id,
@@ -50,7 +50,6 @@ const EditUser = (props) => {
                 user.profession = user.profession._id
                 user.sex = user.sex
                 user.qualities = qualities
-                console.log('start', data)
                 setData(user)
             })
         }, []);
