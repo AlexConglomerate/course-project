@@ -5,16 +5,33 @@ import TextField from "../common/form/textField";
 import RadioField from "../common/form/radioField";
 import api from "../../api";
 import SelectField from "../common/form/selectField";
+import {useHistory} from "react-router-dom";
 
 const EditUser = (props) => {
         const userId = props.props.match.params.userId
-        const [data, setData] = useState({
-            email: "",
-            name: "",
-            profession: "",
-            sex: "male",
-            qualities: [],
-        });
+        const [data, setData] = useState();
+        const history = useHistory()
+
+        const handleClick = () => {
+            const qualities = data.qualities.reduce((acc, item) => {
+                acc.push({
+                    _id: item.value,
+                    name: item.label,
+                    color: item.color,
+                })
+                return acc
+            }, [])
+
+            const profession = {
+                "_id": data.profession,
+                "name": professions.filter(item => item.value === data.profession).label,
+            }
+
+            const newData = {...data, qualities,profession};
+
+            api.users.update(userId, newData)
+            history.push(`/users/${userId}/`)
+        }
 
         useEffect(() => {
             api.users.fetchAll().then((data) => {
@@ -27,15 +44,14 @@ const EditUser = (props) => {
                     })
                     return acc
                 }, [])
-                const dataFromDB = {
-                    email: "wer@mail.con",
-                    name: user.name,
-                    profession: user.profession._id,
-                    sex: "male",
-                    qualities: qualities,
-                }
-                console.log("dataFromDB", dataFromDB)
-                setData({...dataFromDB})
+
+                user.email = user.email
+                user.name = user.name
+                user.profession = user.profession._id
+                user.sex = user.sex
+                user.qualities = qualities
+                console.log('start', data)
+                setData(user)
             })
         }, []);
 
@@ -147,6 +163,8 @@ const EditUser = (props) => {
                 qualities: getQualities(qualities)
             });
         };
+
+        if (!data) return 'Loading...'
         return (
             <form onSubmit={handleSubmit}>
                 <TextField
@@ -197,6 +215,7 @@ const EditUser = (props) => {
                     className="btn btn-primary w-100 mx-auto"
                     type="submit"
                     disabled={!isValid}
+                    onClick={handleClick}
                 >
                     Обновить
                 </button>

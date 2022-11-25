@@ -7,7 +7,7 @@ function EditUserPage(props) {
             <div className="row">
                 <div className="col-md-6 offset-md-3 shadow p-4">
                     <>
-                        <h3 className="mb-4">Register</h3>
+                        <h3 className="mb-4"></h3>
                         <EditUser props={props}/>
                     </>
                 </div>
