@@ -47,6 +47,7 @@ const EditUser = (props) => {
 
                 user.email = user.email
                 user.name = user.name
+
                 user.profession = user.profession._id
                 user.sex = user.sex
                 user.qualities = qualities
