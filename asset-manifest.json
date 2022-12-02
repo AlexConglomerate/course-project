@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/course-project/static/css/main.6db5275d.chunk.css",
+    "main.js": "/course-project/static/js/main.621ad376.chunk.js",
+    "main.js.map": "/course-project/static/js/main.621ad376.chunk.js.map",
+    "runtime-main.js": "/course-project/static/js/runtime-main.6644bb79.js",
+    "runtime-main.js.map": "/course-project/static/js/runtime-main.6644bb79.js.map",
+    "static/css/2.07203677.chunk.css": "/course-project/static/css/2.07203677.chunk.css",
+    "static/js/2.0f75ee3c.chunk.js": "/course-project/static/js/2.0f75ee3c.chunk.js",
+    "static/js/2.0f75ee3c.chunk.js.map": "/course-project/static/js/2.0f75ee3c.chunk.js.map",
+    "static/js/3.f0401f2a.chunk.js": "/course-project/static/js/3.f0401f2a.chunk.js",
+    "static/js/3.f0401f2a.chunk.js.map": "/course-project/static/js/3.f0401f2a.chunk.js.map",
+    "index.html": "/course-project/index.html",
+    "static/css/2.07203677.chunk.css.map": "/course-project/static/css/2.07203677.chunk.css.map",
+    "static/css/main.6db5275d.chunk.css.map": "/course-project/static/css/main.6db5275d.chunk.css.map",
+    "static/js/2.0f75ee3c.chunk.js.LICENSE.txt": "/course-project/static/js/2.0f75ee3c.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6644bb79.js",
+    "static/css/2.07203677.chunk.css",
+    "static/js/2.0f75ee3c.chunk.js",
+    "static/css/main.6db5275d.chunk.css",
+    "static/js/main.621ad376.chunk.js"
+  ]
+}
