@@ -2,7 +2,7 @@ name: Github Page Deploy Workflow
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master ] # name branch for deploy
 jobs:
   deploy:
     runs-on: ubuntu-latest
