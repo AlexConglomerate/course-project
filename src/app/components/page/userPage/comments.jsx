@@ -3,11 +3,11 @@ import api from "../../../api";
 import moment, {unix} from "moment";
 
 function Comments({props, handleRemoveComment}) {
-    const {content, created_at, pageId, userId, _id} = props
+    const {content, created_at, userId, _id} = props
     const [user, setUser] = useState();
     useEffect(() => {
         api.users.getById(userId).then((data) => setUser(data.name));
-    }, []);
+    }, [])
 
     if (props.length === 0) return
     return (
