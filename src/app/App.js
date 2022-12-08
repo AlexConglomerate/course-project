@@ -6,8 +6,6 @@ import Login from "./layouts/login";
 import Main from "./layouts/main";
 import NavBar from "./components/ui/navBar";
 import editUserPage from "./components/page/editUserPage";
-import UserPageNew from "./components/page/userPage/userPageNew";
-import UserPageTest from "./components/page/userPage/userPageTest";
 
 function App() {
     return (
@@ -15,7 +13,6 @@ function App() {
             <NavBar/>
             <Switch>
                 <Route path="/users/:userId?/edit" component={editUserPage}/>
-                <Route path="/test" component={UserPageTest}/>
                 <Route path="/users/:userId?" component={Users}/>
                 <Route path="/login/:type?" component={Login}/>
                 <Route path="/" exact component={Main}/>
