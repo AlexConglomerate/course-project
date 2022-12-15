@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import PropTypes from "prop-types";
 import {toast} from "react-toastify";
-import ProfessionService from "../services/profession.service";
-import {professions} from "../api/fake.api/professions.api";
+import QualitiesService from "../services/qualities.servise";
 
 const QualitiesContext = React.createContext()
+export const useQualities = () => useContext(QualitiesContext)
 
 export const QualitiesProvider = ({children}) => {
     const [isLoading, setLoading] = useState(true)
@@ -27,13 +27,15 @@ export const QualitiesProvider = ({children}) => {
         setError(message)
     }
 
-    function getProfession(id) {
-        return professions.find((p) => p._id === id)
-    }
+    const getQualities = (id) => qualities.find(p => p._id === id)
+
+    console.log(getQualities(`6399c267f62bc5af8df86c24`))
+
 
     async function getQualitiesList() {
         try {
-            const {content} = await ProfessionService.get();
+            const {content} = await QualitiesService.get();
+            console.log('content', content)
             setQualities(content);
             setLoading(false);
         } catch (error) {
@@ -43,8 +45,7 @@ export const QualitiesProvider = ({children}) => {
 
     return (
         <QualitiesContext.Provider
-            value={{ isLoading, professions, getProfession }}>
-            12345
+            value={{isLoading, qualities, getQualities}}>
             {children}
         </QualitiesContext.Provider>
     );
