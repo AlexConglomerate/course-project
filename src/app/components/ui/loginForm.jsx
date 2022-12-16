@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { validator } from "../../utils/validator";
+import React, {useEffect, useState} from "react";
+import {validator} from "../../utils/validator";
 import TextField from "../common/form/textField";
 import CheckBoxField from "../common/form/checkBoxField";
+import axios from "axios";
+import {setTokens} from "../../services/localStorage.service";
+import {useHistory} from "react-router-dom";
 
 const LoginForm = () => {
+    const history = useHistory()
     const [data, setData] = useState({
         email: "",
         password: "",
@@ -51,11 +55,49 @@ const LoginForm = () => {
     };
     const isValid = Object.keys(errors).length === 0;
 
-    const handleSubmit = (e) => {
+    async function logIn({email, password}) {
+        const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_FIREBASE_KEY}`;
+        const httpAuth = axios.create();
+        try {
+            const {data} = await httpAuth.post(url, {
+                email,
+                password,
+                returnSecureToken: true
+            });
+            setTokens(data)
+            history.push('/')
+        } catch (error) {
+            const {code, message} = error.response.data.error
+            console.log(code, message)
+            if (code === 400) {
+                if (message === "EMAIL_NOT_FOUND") {
+                    const error = errors
+                    const errorObject = {
+                        ...error,
+                        email: "Пользователя с таким Email не существует"
+                    }
+                    setErrors(errorObject)
+                }
+                if (message === "INVALID_PASSWORD") {
+                    const error = errors
+                    const errorObject = {
+                        ...error,
+                        password: "Неправильный пароль"
+                    }
+                    setErrors(errorObject)
+                }
+            }
+        }
+    }
+
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const isValid = validate();
-        if (!isValid) return;
-        console.log(data);
+        if (!isValid) return
+        console.log(data)
+        const aaa = await logIn(data)
+        console.log(aaa)
     };
     return (
         <form onSubmit={handleSubmit}>
