@@ -71,20 +71,10 @@ const LoginForm = () => {
             console.log(code, message)
             if (code === 400) {
                 if (message === "EMAIL_NOT_FOUND") {
-                    const error = errors
-                    const errorObject = {
-                        ...error,
-                        email: "Пользователя с таким Email не существует"
-                    }
-                    setErrors(errorObject)
+                    setErrors(prev => ({...prev, email: "Пользователя с таким Email не существует"}))
                 }
                 if (message === "INVALID_PASSWORD") {
-                    const error = errors
-                    const errorObject = {
-                        ...error,
-                        password: "Неправильный пароль"
-                    }
-                    setErrors(errorObject)
+                    setErrors(prev => ({...prev, password: "Неправильный пароль"}))
                 }
             }
         }
