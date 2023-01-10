@@ -10,5 +10,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="react-git-app" />
     <orderEntry type="module" module-name="123" />
+    <orderEntry type="module" module-name="auth" />
   </component>
 </module>
