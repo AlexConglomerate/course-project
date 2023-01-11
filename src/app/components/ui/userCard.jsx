@@ -1,13 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useHistory } from "react-router-dom";
-import { useAuth } from "../../hooks/useAuth";
-const UserCard = ({ user }) => {
+import {useHistory} from "react-router-dom";
+import {useAuth} from "../../hooks/useAuth";
+import {getProfessionsByIds} from "../../store/profession";
+import {useSelector} from "react-redux";
+
+const UserCard = ({user}) => {
     const history = useHistory();
-    const { currentUser } = useAuth();
+    const {currentUser} = useAuth();
     const handleClick = () => {
         history.push(history.location.pathname + "/edit");
     };
+    const professionName = useSelector(getProfessionsByIds(user.profession)).name
     return (
         <div className="card mb-3">
             <div className="card-body">
@@ -29,7 +33,7 @@ const UserCard = ({ user }) => {
                     <div className="mt-3">
                         <h4>{user.name}</h4>
                         <p className="text-secondary mb-1">
-                            {user.profession.name}
+                            {professionName}
                         </p>
                         <div className="text-muted">
                             <i

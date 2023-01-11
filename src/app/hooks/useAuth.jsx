@@ -1,14 +1,12 @@
-import React, {useContext, useState, useEffect} from "react";
+import React, { useContext, useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
 import axios from "axios";
 import userService from "../services/user.service";
 import localStorageService, {
     setTokens
 } from "../services/localStorage.service";
-import {useHistory} from "react-router-dom";
-import qualityService from "../services/quality.service";
-import professionService from "../services/profession.service";
+import { useHistory } from "react-router-dom";
 
 export const httpAuth = axios.create({
     baseURL: "https://identitytoolkit.googleapis.com/v1/",
@@ -22,15 +20,15 @@ export const useAuth = () => {
     return useContext(AuthContext);
 };
 
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
     const [currentUser, setUser] = useState();
     const [error, setError] = useState(null);
     const [isLoading, setLoading] = useState(true);
     const history = useHistory();
 
-    async function logIn({email, password}) {
+    async function logIn({ email, password }) {
         try {
-            const {data} = await httpAuth.post(
+            const { data } = await httpAuth.post(
                 `accounts:signInWithPassword`,
                 {
                     email,
@@ -42,7 +40,7 @@ const AuthProvider = ({children}) => {
             await getUserData();
         } catch (error) {
             errorCatcher(error);
-            const {code, message} = error.response.data.error;
+            const { code, message } = error.response.data.error;
             console.log(code, message);
             if (code === 400) {
                 switch (message) {
@@ -57,20 +55,25 @@ const AuthProvider = ({children}) => {
             }
         }
     }
-
     function logOut() {
         localStorageService.removeAuthData();
         setUser(null);
         history.push("/");
     }
-
     function randomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
-
-    async function signUp({email, password, ...rest}) {
+    async function updateUserData(data) {
         try {
-            const {data} = await httpAuth.post(`accounts:signUp`, {
+            const { content } = await userService.update(data);
+            setUser(content);
+        } catch (error) {
+            errorCatcher(error);
+        }
+    }
+    async function signUp({ email, password, ...rest }) {
+        try {
+            const { data } = await httpAuth.post(`accounts:signUp`, {
                 email,
                 password,
                 returnSecureToken: true
@@ -90,7 +93,7 @@ const AuthProvider = ({children}) => {
             });
         } catch (error) {
             errorCatcher(error);
-            const {code, message} = error.response.data.error;
+            const { code, message } = error.response.data.error;
             console.log(code, message);
             if (code === 400) {
                 if (message === "EMAIL_EXISTS") {
@@ -102,35 +105,21 @@ const AuthProvider = ({children}) => {
             }
         }
     }
-
     async function createUser(data) {
         try {
-            const {content} = await userService.create(data);
+            const { content } = await userService.create(data);
             setUser(content);
         } catch (error) {
             errorCatcher(error);
         }
     }
-
-    // todo => Написать функцию обновления данных
-    // async function updateUser(data) {
-    //     try {
-    //         const {content} = await userService.create(data);
-    //         console.log(content);
-    //         setUser(content);
-    //     } catch (error) {
-    //         errorCatcher(error);
-    //     }
-    // }
-
     function errorCatcher(error) {
-        const {message} = error.response.data;
+        const { message } = error.response.data;
         setError(message);
     }
-
     async function getUserData() {
         try {
-            const {content} = await userService.getCurrentUser();
+            const { content } = await userService.getCurrentUser();
             setUser(content);
         } catch (error) {
             errorCatcher(error);
@@ -138,7 +127,6 @@ const AuthProvider = ({children}) => {
             setLoading(false);
         }
     }
-
     useEffect(() => {
         if (localStorageService.getAccessToken()) {
             getUserData();
@@ -153,7 +141,9 @@ const AuthProvider = ({children}) => {
         }
     }, [error]);
     return (
-        <AuthContext.Provider value={{signUp, logIn, currentUser, logOut,}}>
+        <AuthContext.Provider
+            value={{ signUp, logIn, currentUser, logOut, updateUserData }}
+        >
             {!isLoading ? children : "Loading..."}
         </AuthContext.Provider>
     );
